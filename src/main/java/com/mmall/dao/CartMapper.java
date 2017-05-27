@@ -1,6 +1,9 @@
 package com.mmall.dao;
 
 import com.mmall.pojo.Cart;
+import org.apache.ibatis.annotations.Param;
+
+import java.util.List;
 
 public interface CartMapper {
     //根据主键删除
@@ -15,4 +18,21 @@ public interface CartMapper {
     int updateByPrimaryKeySelective(Cart record);
     //没有空判断的更新
     int updateByPrimaryKey(Cart record);
+
+    Cart selectCartByUserIdProductId(@Param("userId") Integer userId, @Param("productId")Integer  productId);
+
+    List<Cart> selectCartByUserId(Integer userId);
+
+    int selectCartProductCheckedStatusByUserId(Integer userId);
+
+    int deleteByUserIdProductIds(@Param("userId") Integer userId,@Param("productList")List<String> productList);
+
+    int checkedOrUncheckedProduct(@Param("userId") Integer userId,@Param("productId")Integer  productId,@Param("checked")Integer  checked);
+
+    int selectCartProductCount(Integer useId);
+
+    //查询勾选的
+    List<Cart> selectCheckedCartByUserId(Integer userId);
+
+
 }
